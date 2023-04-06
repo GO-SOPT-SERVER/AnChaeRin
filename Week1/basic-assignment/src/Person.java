@@ -1,6 +1,6 @@
 //2-1 클래스와 인스턴스
 public class Person {
-    private String name;
+    protected String name;
     private int age;
     private String phone;
 
@@ -15,7 +15,9 @@ public class Person {
     }
 
     public static void main(String[] args) {
-        Person person = new Person("Chaerin", 24, "010-9399-3872");
-        person.sayHi();
+        Person person1 = new Person("Chaerin", 24, "010-9399-3872");
+        Person person2 = new Person("Markus", 26, "010-9090-8080");
+        person1.sayHi();
+        person2.sayHi();
     }
 }
