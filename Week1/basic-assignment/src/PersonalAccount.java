@@ -1,3 +1,4 @@
+//2-5-4 abstract class
 public class PersonalAccount extends BasicAccount {
     private String owner;
 

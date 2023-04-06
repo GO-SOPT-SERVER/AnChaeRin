@@ -1,13 +1,14 @@
-public class Account implements Transaction {
+//2-5-3 interface
+public class Account implements Transaction<Integer> {
     private int amount;
 
     @Override
-    public void withdraw(int amount) {
+    public void withdraw(Integer amount) {
         this.amount -= amount;
     }
 
     @Override
-    public void deposit(int amount) {
+    public void deposit(Integer amount) {
         this.amount += amount;
     }
 
