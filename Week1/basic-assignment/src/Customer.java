@@ -14,9 +14,15 @@ public class Customer extends Person {
         return String.format("%s: I want to %s", this.name, req);
     }
 
+    public String request(RequestType req, String name, int amount) {
+        return String.format("%s: I want to %s\n The amount is $%d.", this.name, req, amount);
+    }
+
     public static void main(String[] args) {
         Customer customer = new Customer("Chaerin", 24, "010-9399-3872", "#123");
-        String request = customer.request(RequestType.DEPOSIT, customer.name);
-        System.out.println(request);
+        String request1 = customer.request(RequestType.DEPOSIT, customer.name);
+        String request2 = customer.request(RequestType.WITHDRAW, customer.name, 30);
+        System.out.println(request1);
+        System.out.println(request2);
     }
 }
