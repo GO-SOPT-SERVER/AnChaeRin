@@ -1,7 +1,7 @@
 //2-5-3 interface
 // 2-5-5 generic type
 public class Account implements Transaction<Integer> {
-    private int amount;
+    int amount;
 
     @Override
     public void withdraw(Integer amount) {

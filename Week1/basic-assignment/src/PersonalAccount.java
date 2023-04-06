@@ -8,16 +8,16 @@ public class PersonalAccount extends BasicAccount {
 
     @Override
     public void withdraw(int amount) {
-        this.amount -= amount;
+        super.amount -= amount;
     }
 
     @Override
     public void deposit(int amount) {
-        this.amount += amount;
+        super.amount += amount;
     }
 
     public void checkAmount() {
-        System.out.println("The amount of money in this account: " + amount);
+        System.out.println("The amount of money in this account: " + super.amount);
     }
 
     public void checkAccountInfo() {

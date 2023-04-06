@@ -1,8 +1,8 @@
 //2-1 클래스와 인스턴스
 public class Person {
-    protected String name;
-    private int age;
-    private String phone;
+    String name;
+    int age;
+    String phone;
 
     public Person(String name, int age, String phone) {
         this.name = name;

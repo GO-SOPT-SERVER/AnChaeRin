@@ -5,7 +5,7 @@ public class Banker extends Person {
 
     @Override
     public void sayHi() {
-        System.out.println("Hi there! My name is " + name + ".\nHow can I help you?");
+        System.out.println("Hi there! My name is " + super.name + ".\nHow can I help you?");
     }
 
     public static void main(String[] args) {
