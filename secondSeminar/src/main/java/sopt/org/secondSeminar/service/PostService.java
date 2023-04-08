@@ -4,6 +4,10 @@ import org.springframework.stereotype.Service;
 import sopt.org.secondSeminar.controller.post.dto.request.RegisterRequestDto;
 import sopt.org.secondSeminar.domain.Post;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static sopt.org.secondSeminar.SecondSeminarApplication.postList;
 
 @Service
@@ -21,8 +25,19 @@ public class PostService {
         return newPost.getId();
     }
 
-    public String search(Long id) {
-        Post searchedPost = postList.stream().filter(post -> post.getId().equals(id)).findFirst().orElseThrow(() -> new IllegalArgumentException());
+    public String getDetail(Long id) {
+        Post searchedPost = postList.stream()
+                .filter(post -> post.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException());
         return searchedPost.toString();
+    }
+
+    public List<Post> search(String title) {
+        List<Post> searchedPostList = (List<Post>) postList.stream()
+                .filter(post -> post.getTitle().equals(title))
+                .collect(Collectors.toList());
+        
+        return searchedPostList;
     }
 }

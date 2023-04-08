@@ -3,7 +3,11 @@ package sopt.org.secondSeminar.controller.post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import sopt.org.secondSeminar.controller.post.dto.request.RegisterRequestDto;
+import sopt.org.secondSeminar.domain.Post;
 import sopt.org.secondSeminar.service.PostService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static sopt.org.secondSeminar.SecondSeminarApplication.postList;
 
@@ -16,16 +20,15 @@ public class PostController {
     @GetMapping("/post/{postId}")
     public String getPost(@PathVariable final Long postId) {
         System.out.println("요청 게시물 아이디: " + postId);
-        postService.search(postId);
 
-        return postService.search(postId);
+        return postService.getDetail(postId);
     }
 
     @GetMapping("/post/search")
-    public String search(@RequestParam final String title) {
+    public List<Post> search(@RequestParam final String title) {
         System.out.println("게시물 제목 검색 인자: " + title);
 
-        return "게시물 검색 성공";
+        return postService.search(title);
     }
 
     @PostMapping("/post")
