@@ -8,6 +8,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class RegisterRequestDto {
+    private Long id;
     private String title;
     private String content;
 

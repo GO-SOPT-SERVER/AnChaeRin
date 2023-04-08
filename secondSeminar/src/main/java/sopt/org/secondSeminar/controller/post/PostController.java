@@ -16,8 +16,9 @@ public class PostController {
     @GetMapping("/post/{postId}")
     public String getPost(@PathVariable final Long postId) {
         System.out.println("요청 게시물 아이디: " + postId);
+        postService.search(postId);
 
-        return "게시물 조회 성공";
+        return postService.search(postId);
     }
 
     @GetMapping("/post/search")
