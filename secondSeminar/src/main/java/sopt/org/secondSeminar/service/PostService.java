@@ -34,10 +34,10 @@ public class PostService {
     }
 
     public List<Post> search(String title) {
-        List<Post> searchedPostList = (List<Post>) postList.stream()
+        List<Post> searchedPostList = postList.stream()
                 .filter(post -> post.getTitle().equals(title))
                 .collect(Collectors.toList());
-        
+
         return searchedPostList;
     }
 }
