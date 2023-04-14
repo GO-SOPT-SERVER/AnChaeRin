@@ -1,6 +1,7 @@
 package sopt.org.secondSeminar.service;
 
 import org.springframework.stereotype.Service;
+import sopt.org.secondSeminar.controller.post.dto.request.EditRequestDto;
 import sopt.org.secondSeminar.controller.post.dto.request.RegisterRequestDto;
 import sopt.org.secondSeminar.domain.Post;
 
@@ -39,5 +40,20 @@ public class PostService {
                 .collect(Collectors.toList());
 
         return searchedPostList;
+    }
+
+    public String edit(Long id, EditRequestDto request) {
+        Post editPost = postList.stream()
+                .filter(post -> post.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException());
+
+        editPost.setTitle(request.getTitle());
+        editPost.setContent(request.getContent());
+
+        postList.replaceAll(post -> post.getId().equals(id) ? editPost : post);
+
+        return editPost.toString();
+
     }
 }

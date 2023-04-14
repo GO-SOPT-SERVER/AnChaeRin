@@ -2,6 +2,7 @@ package sopt.org.secondSeminar.controller.post;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import sopt.org.secondSeminar.controller.post.dto.request.EditRequestDto;
 import sopt.org.secondSeminar.controller.post.dto.request.RegisterRequestDto;
 import sopt.org.secondSeminar.domain.Post;
 import sopt.org.secondSeminar.service.PostService;
@@ -38,5 +39,12 @@ public class PostController {
         System.out.println(postList.get(postId.intValue() - 1).toString());
 
         return postId + "번 게시물이 등록되었습니다!";
+    }
+
+    @PutMapping("/post/{postId}")
+    public String editPost(@PathVariable final Long postId, @RequestBody final EditRequestDto request) {
+        System.out.println("수정 게시물 아이디: " + postId);
+
+        return postService.edit(postId, request);
     }
 }
