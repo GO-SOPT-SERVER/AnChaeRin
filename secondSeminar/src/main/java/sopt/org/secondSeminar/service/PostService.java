@@ -54,6 +54,13 @@ public class PostService {
         postList.replaceAll(post -> post.getId().equals(id) ? editPost : post);
 
         return editPost.toString();
+    }
 
+    public String delete(Long id) {
+        List<Post> filteredList = postList.stream()
+                .filter(post -> !post.getId().equals(id))
+                .collect(Collectors.toList());
+
+        return filteredList.toString();
     }
 }

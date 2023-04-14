@@ -47,4 +47,11 @@ public class PostController {
 
         return postService.edit(postId, request);
     }
+
+    @DeleteMapping("/post/{postId}")
+    public String deletePost(@PathVariable final Long postId) {
+        System.out.println("삭제 게시물 아이디: " + postId);
+
+        return postService.delete(postId);
+    }
 }
