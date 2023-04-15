@@ -11,8 +11,7 @@ public class Customer extends Person {
     }
 
     public String request(RequestType req, String name) {
-//        available case: this.name, super.name, name
-        return String.format("%s: I want to %s", super.name, req);
+        return String.format("%s: I want to %s", this.name, req);
     }
 
     public String request(RequestType req, String name, int amount) {
