@@ -2,7 +2,7 @@
 public class PersonalAccount extends BasicAccount {
     private String owner;
 
-    PersonalAccount(String owner) {
+    public PersonalAccount(String owner) {
         this.owner = owner;
     }
 
