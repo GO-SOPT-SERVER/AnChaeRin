@@ -1,8 +1,10 @@
 package sopt.org.secondSeminar.domain;
 
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class Post {
 
     private Long id;
@@ -29,10 +31,4 @@ public class Post {
         this.content = content;
     }
 
-    @Override
-    public String toString() {
-        return "id: " + this.id + "\n" +
-                "title: " + this.title + "\n" +
-                "content: " + this.content + "\n";
-    }
 }

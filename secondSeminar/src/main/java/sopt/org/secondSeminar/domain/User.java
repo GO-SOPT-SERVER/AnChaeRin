@@ -1,8 +1,10 @@
 package sopt.org.secondSeminar.domain;
 
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class User {
 
     private Long id;
@@ -25,13 +27,5 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-
-    @Override
-    public String toString() {
-        return "id: " + this.id + "\n" +
-                "gender: " + this.gender + "\n" +
-                "name: " + this.name + "\n" +
-                "contact: " + this.contact + "\n" +
-                "age: " + this.age;
-    }
+    
 }
