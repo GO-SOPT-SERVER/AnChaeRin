@@ -1,15 +1,11 @@
 package sopt.org.secondSeminar.controller.post.dto.request;
 
-
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class EditRequestDto {
-    private String title;
-    private String content;
-
-
+    final private String title;
+    final private String content;
 }

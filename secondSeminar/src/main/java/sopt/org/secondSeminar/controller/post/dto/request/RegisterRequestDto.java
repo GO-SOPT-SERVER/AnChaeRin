@@ -1,16 +1,12 @@
 package sopt.org.secondSeminar.controller.post.dto.request;
 
-
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class RegisterRequestDto {
-    private Long id;
-    private String title;
-    private String content;
-
-
+    final private Long id;
+    final private String title;
+    final private String content;
 }
