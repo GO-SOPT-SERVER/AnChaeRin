@@ -5,8 +5,8 @@ import sopt.org.ThirdSeminar.domain.User;
 
 import java.util.Optional;
 
-public interface UserRepository extends Repository<User,Long> {
+public interface UserRepository extends Repository<User, Long> {
     void save(User user);
 
-    User findById(Long id);
+    Optional<User> findById(Long id);
 }
