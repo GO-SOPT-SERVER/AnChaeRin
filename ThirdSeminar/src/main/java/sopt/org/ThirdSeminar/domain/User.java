@@ -3,7 +3,6 @@ package sopt.org.ThirdSeminar.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
 
 @Entity
 @Getter
