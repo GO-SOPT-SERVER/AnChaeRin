@@ -3,6 +3,8 @@ package sopt.org.ThirdSeminar.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,6 +22,10 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany
+    @JoinColumn(name="USER_ID")
+    private List<Post> posts=new ArrayList<>();
 
     @Builder
     public User(String nickname, String email, String password){
