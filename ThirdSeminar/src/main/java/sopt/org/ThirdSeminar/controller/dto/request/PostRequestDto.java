@@ -1,13 +1,17 @@
 package sopt.org.ThirdSeminar.controller.dto.request;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import sopt.org.ThirdSeminar.domain.User;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.Optional;
 
 @Getter
 @RequiredArgsConstructor
+@Builder
 public class PostRequestDto {
 
     @NotBlank
@@ -16,5 +20,8 @@ public class PostRequestDto {
 
     @NotBlank
     private final String content;
+
+    private final User user;
+
 }
 
