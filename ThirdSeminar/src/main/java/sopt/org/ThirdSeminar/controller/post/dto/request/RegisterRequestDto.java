@@ -1,4 +1,4 @@
-package sopt.org.ThirdSeminar.controller.dto.request;
+package sopt.org.ThirdSeminar.controller.post.dto.request;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import javax.validation.constraints.Pattern;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class UserRequestDto {
+public class RegisterRequestDto {
     @Email(message = "이메일 형식에 맞지 않습니다")
     @NotNull
     private final String email;

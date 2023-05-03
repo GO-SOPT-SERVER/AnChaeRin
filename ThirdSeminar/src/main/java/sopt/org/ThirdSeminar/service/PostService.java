@@ -3,8 +3,8 @@ package sopt.org.ThirdSeminar.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sopt.org.ThirdSeminar.controller.dto.request.PostRequestDto;
-import sopt.org.ThirdSeminar.controller.dto.response.PostResponseDto;
+import sopt.org.ThirdSeminar.controller.post.dto.response.ResisterResponseDto;
+import sopt.org.ThirdSeminar.controller.user.dto.request.SignupRequestDto;
 import sopt.org.ThirdSeminar.domain.Post;
 import sopt.org.ThirdSeminar.domain.User;
 import sopt.org.ThirdSeminar.exception.CustomException;
@@ -22,7 +22,7 @@ public class PostService {
     private final UserRepository userRepository;
 
     @Transactional
-    public PostResponseDto create(Long userId, PostRequestDto request) {
+    public ResisterResponseDto create(Long userId, SignupRequestDto request) {
         Optional<User> user = userRepository.findById(userId);
 
         if (!user.isPresent()) {
@@ -36,7 +36,7 @@ public class PostService {
                 .build();
 
         postRepository.save(post);
-        return PostResponseDto.of(post.getId(), user.get().getId(), post.getTitle(), post.getContent());
+        return ResisterResponseDto.of(post.getId(), user.get().getId(), post.getTitle(), post.getContent());
 
     }
 }
