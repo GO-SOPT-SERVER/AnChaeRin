@@ -5,17 +5,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import sopt.org.ThirdSeminar.common.dto.ApiResponseDto;
 import sopt.org.ThirdSeminar.controller.post.dto.response.ResisterResponseDto;
+import sopt.org.ThirdSeminar.controller.post.dto.response.SearchResponseDto;
 import sopt.org.ThirdSeminar.controller.user.dto.request.SignupRequestDto;
 import sopt.org.ThirdSeminar.exception.SuccessStatus;
 import sopt.org.ThirdSeminar.service.PostService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class PostController {
 
     private final PostService postService;
+
+    @GetMapping("/post")
+    public ApiResponseDto<List<SearchResponseDto>> search(@RequestParam final Long user_id) {
+        return ApiResponseDto.success(SuccessStatus.POST_SEARCH_SUCCESS, postService.search(user_id));
+    }
 
     @PostMapping("/post")
     @ResponseStatus(HttpStatus.CREATED)
