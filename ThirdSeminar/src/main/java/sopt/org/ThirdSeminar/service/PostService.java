@@ -16,6 +16,7 @@ import sopt.org.ThirdSeminar.infrastructure.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,10 +44,13 @@ public class PostService {
 
     }
 
-    public List<SearchResponseDto> search(Long user_id) {
-        List<Post> postList = postRepository.findAll();
+    public List<SearchResponseDto> search(Long userId) {
+        System.out.println(userId);
+        List<Post> postList = postRepository.findAll().stream()
+                .filter(post -> post.getUser().getId().equals(userId))
+                .collect(Collectors.toList());
+
         List<SearchResponseDto> postsResponseDtoList = new ArrayList<>();
-        
         for (Post post : postList) {
             postsResponseDtoList.add(SearchResponseDto.builder()
                     .id(post.getId())

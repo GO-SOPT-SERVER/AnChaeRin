@@ -1,15 +1,15 @@
 package sopt.org.ThirdSeminar.controller.post.dto.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Builder
 public class SearchResponseDto {
-    private Long id;
-    private String title;
-    private String content;
+    private final Long id;
+    private final String title;
+    private final String content;
 }
 
