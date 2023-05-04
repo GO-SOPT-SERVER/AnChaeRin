@@ -1,14 +1,13 @@
 package sopt.org.ThirdSeminar.controller.user.dto.response;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class SignupResponseDto {
-    private Long userId;
-    private String nickname;
+    private final Long userId;
+    private final String nickname;
 
     public static SignupResponseDto of(Long userId, String nickname) {
         return new SignupResponseDto(userId, nickname);
