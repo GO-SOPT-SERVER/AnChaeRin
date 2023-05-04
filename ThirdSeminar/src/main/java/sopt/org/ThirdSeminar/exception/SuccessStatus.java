@@ -11,13 +11,13 @@ public enum SuccessStatus {
     /*
    user
     */
-    SIGNUP_SUCCESS(HttpStatus.CREATED,"회원가입이 완료되었습니다."),
+    SIGNUP_SUCCESS(HttpStatus.CREATED, "회원가입이 완료되었습니다."),
 
     /*
     post
      */
-    POST_REGISTER_SUCCESS(HttpStatus.CREATED,"게시물 등록이 완료되었습니다."),
-    ;
+    POST_REGISTER_SUCCESS(HttpStatus.CREATED, "게시물 등록이 완료되었습니다."),
+    POST_SEARCH_SUCCESS(HttpStatus.ACCEPTED, "게시물 검색이 완료되었습니다.");
 
     private final HttpStatus httpStatus;
     private final String message;

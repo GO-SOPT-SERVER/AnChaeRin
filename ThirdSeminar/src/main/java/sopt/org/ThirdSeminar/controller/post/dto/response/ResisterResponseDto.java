@@ -1,17 +1,16 @@
 package sopt.org.ThirdSeminar.controller.post.dto.response;
 
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class ResisterResponseDto {
-    private Long id;
-    private Long userId;
-    private String title;
-    private String content;
+    final private Long id;
+    final private Long userId;
+    final private String title;
+    final private String content;
 
     public static ResisterResponseDto of(Long postId, Long userId, String title, String content) {
         return new ResisterResponseDto(postId, userId, title, content);
