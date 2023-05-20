@@ -12,8 +12,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class BoardRequestDto {
 
-    @Email(message = "이메일 형식에 맞지 않습니다")
-    private String email;
+    // @Email(message = "이메일 형식에 맞지 않습니다")
+    // private String email;
 
     @NotBlank
     private String title;
