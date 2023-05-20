@@ -29,6 +29,8 @@ public enum Error {
      * 500 INTERNAL SERVER ERROR
      */
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "알 수 없는 서버 에러가 발생했습니다"),
+    TOKEN_TIME_EXPIRED_EXCEPTION(HttpStatus.UNAUTHORIZED,"유저인증 실패"),
+    INVALID_PASSWORD_EXCEPTION(HttpStatus.UNAUTHORIZED,"잘못된 패스워드")
     ;
 
     private final HttpStatus httpStatus;

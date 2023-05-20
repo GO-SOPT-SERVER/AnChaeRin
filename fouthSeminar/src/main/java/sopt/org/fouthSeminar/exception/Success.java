@@ -13,6 +13,7 @@ public enum Success {
      */
     SIGNUP_SUCCESS(HttpStatus.CREATED, "회원가입이 완료됐습니다."),
     CREATE_BOARD_SUCCESS(HttpStatus.CREATED, "게시물 생성이 완료됐습니다."),
+    LOGIN_SUCCESS(HttpStatus.ACCEPTED,"로그인 성공")
     ;
 
     private final HttpStatus httpStatus;

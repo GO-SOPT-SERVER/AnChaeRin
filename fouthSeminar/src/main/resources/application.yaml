@@ -20,3 +20,6 @@ logging:
         type:
           descriptor:
             sql: trace
+
+jwt:
+  secret: asdfdskjfsdkjflkdjfkjsdfsdfjaas
