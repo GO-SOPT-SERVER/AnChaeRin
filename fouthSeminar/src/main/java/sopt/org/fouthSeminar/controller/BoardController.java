@@ -1,5 +1,6 @@
 package sopt.org.fouthSeminar.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +20,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/board")
+@SecurityRequirement(name = "JWT Auth")
 public class BoardController {
 
 

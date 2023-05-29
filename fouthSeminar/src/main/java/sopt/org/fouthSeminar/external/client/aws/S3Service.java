@@ -72,6 +72,11 @@ public class S3Service {
         return imageList;
     }
 
+    public void deleteFile(String imageUrl) {
+        String imageKey = imageUrl.substring(56);
+        amazonS3.deleteObject(bucket, imageKey);
+    }
+
     // 파일명 (중복 방지)
     private String createFileName(String fileName) {
         return UUID.randomUUID().toString().concat(getFileExtension(fileName));
