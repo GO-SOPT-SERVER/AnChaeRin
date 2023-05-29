@@ -10,16 +10,6 @@ cloud:
       bucket: sopt-32-seminar
 
 
-    #      accessKey: AKIA5VNXM43LDSHTANF4
-#      secretKey: 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
-#    region:
-#      static: ap-northeast-2
-#
-#    s3:
-#      bucket: sopt-32-seminar
-#    stack:
-#      auto: false
-
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
