@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.*;
 import sopt.org.fouthSeminar.config.jwt.JwtService;
 import sopt.org.fouthSeminar.config.resolver.UserId;
 import sopt.org.fouthSeminar.controller.dto.ApiResponse;
+import sopt.org.fouthSeminar.controller.dto.BoardImageListRequestDto;
 import sopt.org.fouthSeminar.controller.dto.BoardRequestDto;
 import sopt.org.fouthSeminar.exception.Success;
 import sopt.org.fouthSeminar.external.client.aws.S3Service;
 import sopt.org.fouthSeminar.service.BoardService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,9 +30,9 @@ public class BoardController {
     @ResponseStatus(HttpStatus.CREATED)
     public ApiResponse create(
             @UserId Long userId,
-            @ModelAttribute @Valid final BoardRequestDto request) {
-        String boardThumbnailImageUrl = s3Service.uploadImage(request.getThumbnail(), "board");
-        boardService.create(userId, boardThumbnailImageUrl, request);
+            @ModelAttribute @Valid final BoardImageListRequestDto request) {
+        List<String> boardThumbnailImageUrlList = s3Service.uploadImages(request.getBoardImages(), "board");
+        boardService.create(userId, boardThumbnailImageUrlList, request);
         return ApiResponse.success(Success.CREATE_BOARD_SUCCESS);
     }
 }
