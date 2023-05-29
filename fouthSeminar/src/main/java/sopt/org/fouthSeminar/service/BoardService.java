@@ -20,12 +20,13 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     @Transactional
-    public void create(Long userId, BoardRequestDto request) {
+    public void create(Long userId, String boardThumbnailImageUrl, BoardRequestDto request) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(Error.NOT_FOUND_USER_EXCEPTION, Error.NOT_FOUND_USER_EXCEPTION.getMessage()));
 
         Board newBoard = Board.newInstance(
                 user,
+                boardThumbnailImageUrl,
                 request.getTitle(),
                 request.getContent(),
                 request.getIsPublic()

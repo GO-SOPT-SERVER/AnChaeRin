@@ -1,3 +1,26 @@
+cloud:
+  aws:
+    credentials:
+      access-key: AKIA5VNXM43LDSHTANF4
+      secret-key: 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
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+    s3:
+      bucket: sopt-32-seminar
+
+
+    #      accessKey: AKIA5VNXM43LDSHTANF4
+#      secretKey: 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
+#    region:
+#      static: ap-northeast-2
+#
+#    s3:
+#      bucket: sopt-32-seminar
+#    stack:
+#      auto: false
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -12,6 +35,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
 
 logging:
   level:
