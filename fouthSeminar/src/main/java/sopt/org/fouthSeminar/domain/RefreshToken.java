@@ -8,18 +8,18 @@ import org.springframework.data.redis.core.RedisHash;
 public class RefreshToken {
     @Id
     private String refreshToken;
-    private final Long memberId;
+    private final Long userId;
 
-    public RefreshToken(final String refreshToken, final Long memberId) {
+    public RefreshToken(final String refreshToken, final Long userId) {
         this.refreshToken = refreshToken;
-        this.memberId = memberId;
+        this.userId = userId;
     }
 
     public String getRefreshToken() {
         return refreshToken;
     }
 
-    public Long getMemberId() {
-        return memberId;
+    public Long getUserId() {
+        return userId;
     }
 }

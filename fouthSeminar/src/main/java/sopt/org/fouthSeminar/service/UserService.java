@@ -1,6 +1,5 @@
 package sopt.org.fouthSeminar.service;
 
-import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +19,6 @@ import sopt.org.fouthSeminar.infrastructure.UserRepository;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
 
 @Service
 public class UserService {
@@ -65,18 +63,14 @@ public class UserService {
         if (!user.getPassword().equals(request.getPassword())) {
             throw new BadRequestException(Error.INVALID_PASSWORD_EXCEPTION, Error.INVALID_PASSWORD_EXCEPTION.getMessage());
         }
-        String refreshToken = generateRefreshToken(user.getId());
-        String accessToken = generateAccessToken(refreshToken);
-
-        System.out.println(refreshToken);
-        System.out.println(accessToken);
-
 
         return user.getId();
     }
 
     public String generateRefreshToken(final Long userId) {
-        RefreshToken refreshToken = new RefreshToken(jwtService.issuedToken(String.valueOf(userId)), userId);
+        String jwtRefreshToken = jwtService.issueRefreshToken(String.valueOf(userId));
+
+        RefreshToken refreshToken = new RefreshToken(jwtRefreshToken, userId);
         refreshTokenRepository.save(refreshToken);
 
         return refreshToken.getRefreshToken();
@@ -85,18 +79,9 @@ public class UserService {
     public String generateAccessToken(final String refreshTokenId) {
         RefreshToken refreshToken = refreshTokenRepository.findById(refreshTokenId)
                 .orElseThrow(() -> new InvalidRefreshTokenException(Error.INVALID_REFRESH_TOKEN_EXCEPTION, "유효하지 않은 리프레시 토큰"));
-        Long memberId = refreshToken.getMemberId();
+        Long userId = refreshToken.getUserId();
 
-        Date now = new Date();
-        Date expiration = new Date(now.getTime() + ACCESS_TOKEN_EXPIRES);
 
-        String accessToken = Jwts.builder()
-                .signWith(secretKey)
-                .setIssuedAt(now)
-                .setExpiration(expiration)
-                .setSubject(String.valueOf(memberId))
-                .compact();
-
-        return accessToken;
+        return jwtService.issueAccessToken(String.valueOf(userId));
     }
 }
