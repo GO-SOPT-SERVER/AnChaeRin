@@ -33,7 +33,8 @@ public class UserController {
     @Operation(summary = "유저 로그인 API", description = "유저가 서버에 로그인을 요청합니다.")
     public ApiResponse<UserLoginResponseDto> login(@RequestBody @Valid final UserLoginRequestDto request) {
         final Long userId = userService.login(request);
-        final String token = jwtService.issuedToken(String.valueOf(userId));
-        return ApiResponse.success(Success.LOGIN_SUCCESS, UserLoginResponseDto.of(userId, token));
+        final String refreshToken = userService.generateRefreshToken(userId);
+        final String accessToken = userService.generateAccessToken(refreshToken);
+        return ApiResponse.success(Success.LOGIN_SUCCESS, UserLoginResponseDto.of(accessToken, refreshToken));
     }
 }

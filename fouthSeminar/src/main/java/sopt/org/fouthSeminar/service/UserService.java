@@ -2,9 +2,9 @@ package sopt.org.fouthSeminar.service;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sopt.org.fouthSeminar.config.jwt.JwtService;
 import sopt.org.fouthSeminar.controller.dto.UserLoginRequestDto;
 import sopt.org.fouthSeminar.controller.dto.UserRequestDto;
 import sopt.org.fouthSeminar.controller.dto.UserResponseDto;
@@ -13,16 +13,14 @@ import sopt.org.fouthSeminar.domain.User;
 import sopt.org.fouthSeminar.exception.Error;
 import sopt.org.fouthSeminar.exception.model.BadRequestException;
 import sopt.org.fouthSeminar.exception.model.ConflictException;
+import sopt.org.fouthSeminar.exception.model.InvalidRefreshTokenException;
 import sopt.org.fouthSeminar.exception.model.NotFoundException;
 import sopt.org.fouthSeminar.infrastructure.RefreshTokenRepository;
 import sopt.org.fouthSeminar.infrastructure.UserRepository;
-import sopt.org.fouthSeminar.exception.model.InvalidRefreshTokenException;
-
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
-import java.util.UUID;
 
 @Service
 public class UserService {
@@ -32,11 +30,13 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final RefreshTokenRepository refreshTokenRepository;
+    private final JwtService jwtService;
 
     public UserService(final UserRepository userRepository,
-                        final RefreshTokenRepository refreshTokenRepository) {
+                       final RefreshTokenRepository refreshTokenRepository, final JwtService jwtService) {
         this.userRepository = userRepository;
         this.refreshTokenRepository = refreshTokenRepository;
+        this.jwtService = jwtService;
         this.secretKey = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
     }
 
@@ -65,20 +65,26 @@ public class UserService {
         if (!user.getPassword().equals(request.getPassword())) {
             throw new BadRequestException(Error.INVALID_PASSWORD_EXCEPTION, Error.INVALID_PASSWORD_EXCEPTION.getMessage());
         }
+        String refreshToken = generateRefreshToken(user.getId());
+        String accessToken = generateAccessToken(refreshToken);
+
+        System.out.println(refreshToken);
+        System.out.println(accessToken);
+
 
         return user.getId();
     }
 
-    public RefreshToken generateRefreshToken(final Long userId) {
-        RefreshToken refreshToken = new RefreshToken(UUID.randomUUID().toString(), userId);
+    public String generateRefreshToken(final Long userId) {
+        RefreshToken refreshToken = new RefreshToken(jwtService.issuedToken(String.valueOf(userId)), userId);
         refreshTokenRepository.save(refreshToken);
 
-        return refreshToken;
+        return refreshToken.getRefreshToken();
     }
 
     public String generateAccessToken(final String refreshTokenId) {
         RefreshToken refreshToken = refreshTokenRepository.findById(refreshTokenId)
-                .orElseThrow(()->new InvalidRefreshTokenException(Error.INVALID_REFRESH_TOKEN_EXCEPTION,"유효하지 않은 리프레시 토큰"));
+                .orElseThrow(() -> new InvalidRefreshTokenException(Error.INVALID_REFRESH_TOKEN_EXCEPTION, "유효하지 않은 리프레시 토큰"));
         Long memberId = refreshToken.getMemberId();
 
         Date now = new Date();
