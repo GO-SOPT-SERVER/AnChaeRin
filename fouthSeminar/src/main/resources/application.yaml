@@ -1,21 +1,21 @@
 cloud:
   aws:
     credentials:
-
+      access-key: ${aws-access}
+      secret-key: ${aws-secret}
     region:
       static: ap-northeast-2
+    s3:
+      bucket: sopt-32-bucket
     stack:
       auto: false
-    s3:
-      bucket: sopt-32-seminar
-
 
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/sopt_32?useSSL=true&useUnicode=true&serverTimezone=Asia/Seoul
-    username: sopt_server
-    password: 1234
+    url: ${db-url}
+    username: ${db-user}
+    password: ${db-password}
 
   jpa:
     show-sql: true
