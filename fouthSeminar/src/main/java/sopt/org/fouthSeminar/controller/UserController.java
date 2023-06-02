@@ -37,4 +37,12 @@ public class UserController {
         final String accessToken = userService.generateAccessToken(refreshToken);
         return ApiResponse.success(Success.LOGIN_SUCCESS, UserLoginResponseDto.of(accessToken, refreshToken));
     }
+
+    @PostMapping("/token/refresh")
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "token refresh API", description = "access token을 재발급 합니다.")
+    public ApiResponse<TokenRefreshResponseDto> refreshToken(@RequestBody @Valid final TokenRefreshRequestDto request) {
+        final String accessToken = userService.generateAccessToken(request.getRefreshToken());
+        return ApiResponse.success(Success.TOKEN_REFRESH_SUCCESS, TokenRefreshResponseDto.of(accessToken));
+    }
 }
