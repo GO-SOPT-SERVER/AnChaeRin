@@ -27,14 +27,14 @@ public class ControllerExceptionAdvice {
         return ApiResponse.error(Error.REQUEST_VALIDATION_EXCEPTION, String.format("%s. (%s)", fieldError.getDefaultMessage(), fieldError.getField()));
     }
 
-    /**
-     * 500 Internal Server
-     */
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(Exception.class)
-    protected ApiResponse handleException(final Exception e) {
-        return ApiResponse.error(Error.INTERNAL_SERVER_ERROR);
-    }
+//    /**
+//     * 500 Internal Server
+//     */
+//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+//    @ExceptionHandler(Exception.class)
+//    protected ApiResponse handleException(final Exception e) {
+//        return ApiResponse.error(Error.INTERNAL_SERVER_ERROR);
+//    }
 
     /**
      * Sopt custom error
