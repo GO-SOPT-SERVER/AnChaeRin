@@ -1,7 +1,10 @@
 package sopt.org.fouthSeminar.config.jwt;
 
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Header;
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,21 +29,37 @@ public class JwtService {
                 .encodeToString(jwtSecret.getBytes(StandardCharsets.UTF_8));
     }
 
-    // JWT 토큰 발급
-    public String issuedToken(String userId) {
-        final Date now = new Date();
-
+    public String issueRefreshToken(String userId) {
         // 클레임 생성
         final Claims claims = Jwts.claims()
-                .setSubject("access_token")
-                .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + 120 * 60 * 1000L));
+                .setSubject(String.valueOf(userId));
+
 
         //private claim 등록
         claims.put("userId", userId);
 
         return Jwts.builder()
-                .setHeaderParam(Header.TYPE , Header.JWT_TYPE)
+                .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
+                .setClaims(claims)
+                .signWith(getSigningKey())
+                .compact();
+    }
+
+    // JWT 토큰 발급
+    public String issueAccessToken(String userId) {
+        final Date now = new Date();
+
+        // 클레임 생성
+        final Claims claims = Jwts.claims()
+                .setSubject(String.valueOf(userId))
+                .setIssuedAt(now)
+                .setExpiration(new Date(now.getTime() + 30000));
+
+        //private claim 등록
+        claims.put("userId", userId);
+
+        return Jwts.builder()
+                .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
                 .setClaims(claims)
                 .signWith(getSigningKey())
                 .compact();
